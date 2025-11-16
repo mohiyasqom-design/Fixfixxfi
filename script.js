@@ -1,24 +1,50 @@
 const letters=["ا","ب","پ","ت","ث","ج","چ","ح","خ","د","ذ","ر","ز","ژ","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ک","گ","ل","م","ن","و","ه","ی"];
 let fallingSpeed=1.5, spawnRate=1800, score=0, highScore=localStorage.getItem("highscore")||0;
 let lives=3;
-const gameArea=document.getElementById("gameArea"), scoreBox=document.getElementById("score"), livesBox=document.getElementById("lives"), explodeSound=document.getElementById("explodeSound");
+const gameArea=document.getElementById("gameArea"),
+      scoreBox=document.getElementById("score"),
+      livesBox=document.getElementById("lives"),
+      explodeSound=document.getElementById("explodeSound"),
+      hiddenInput=document.getElementById("hiddenInput");
+
 let activeLetters=[], gameInterval, spawnInterval;
 
-window.onload=function(){
-document.getElementById("highScoreBox").textContent="بالاترین امتیاز: "+highScore;
-const kb=document.getElementById("mobileKeyboard");
-letters.forEach(l=>{
-    const btn=document.createElement("button");
-    btn.className="keyBtn";
-    btn.textContent=l;
-    btn.onclick=()=>checkTyped(l);
-    kb.appendChild(btn);
+window.addEventListener("DOMContentLoaded",()=>{
+    document.getElementById("highScoreBox").textContent="بالاترین امتیاز: "+highScore;
+    const kb=document.getElementById("mobileKeyboard");
+    letters.forEach(l=>{
+        const btn=document.createElement("button");
+        btn.className="keyBtn";
+        btn.textContent=l;
+        btn.onclick=()=>checkTyped(l);
+        kb.appendChild(btn);
+    });
+
+    document.getElementById("startBtn").addEventListener("click",()=>{
+        startGame();
+        hiddenInput.focus(); // تمرکز روی input مخفی برای موبایل
+    });
+
+    document.getElementById("theme").addEventListener("change", e=>{
+        document.body.classList.remove('light','dark','neon');
+        document.body.classList.add(e.target.value);
+    });
+
+    document.getElementById("fontSelect").addEventListener("change", e=>{
+        gameArea.style.fontFamily=e.target.value;
+    });
+
+    document.getElementById("letterSize").addEventListener("change", e=>{
+        const size=e.target.value+"px";
+        activeLetters.forEach(l=>l.element.style.fontSize=size);
+    });
+
+    hiddenInput.addEventListener("input", e=>{
+        const val=e.target.value;
+        if(val) checkTyped(val[val.length-1]);
+        e.target.value = "";
+    });
 });
-document.getElementById("startBtn").onclick=startGame;
-document.getElementById("theme").onchange=e=>document.body.className=e.target.value;
-document.getElementById("fontSelect").onchange=e=>gameArea.style.fontFamily=e.target.value;
-document.getElementById("letterSize").onchange=e=>{const size=e.target.value+"px";activeLetters.forEach(l=>l.element.style.fontSize=size);};
-}
 
 function setDifficulty(){
     const level=document.getElementById("difficulty").value;
@@ -37,6 +63,7 @@ function startGame(){
     clearInterval(spawnInterval);
     spawnInterval=setInterval(spawnLetter,spawnRate);
     gameInterval=setInterval(update,20);
+    hiddenInput.focus();
 }
 
 function spawnLetter(){
@@ -72,10 +99,7 @@ function checkTyped(letter){
 
 function destroyLetter(i){
     const l=activeLetters[i];
-    l.element.classList.add("explode");
-    explodeSound.currentTime=0;
-    explodeSound.play();
-    setTimeout(()=>l.element.remove(),300);
+    explodeLetter(l);
     activeLetters.splice(i,1);
     score++;
     scoreBox.textContent="امتیاز: "+score;
@@ -84,6 +108,38 @@ function destroyLetter(i){
         highScore=score;
         localStorage.setItem("highscore",highScore);
         document.getElementById("highScoreBox").textContent="بالاترین امتیاز: "+highScore;
+    }
+}
+
+function explodeLetter(letterObj){
+    const l=letterObj.element;
+    l.classList.add("explode");
+    explodeSound.currentTime=0;
+    explodeSound.play();
+    createParticles(l);
+    setTimeout(()=>l.remove(),300);
+}
+
+function createParticles(letterEl){
+    const colors=[letterEl.style.backgroundColor];
+    for(let i=0;i<10;i++){
+        const particle=document.createElement("div");
+        particle.className="particle";
+        particle.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+        const rect=letterEl.getBoundingClientRect();
+        const parentRect=gameArea.getBoundingClientRect();
+        particle.style.left=(rect.left-parentRect.left+rect.width/2)+"px";
+        particle.style.top=(rect.top-parentRect.top+rect.height/2)+"px";
+        gameArea.appendChild(particle);
+        const angle=Math.random()*2*Math.PI;
+        const dist=Math.random()*50+20;
+        particle.style.transition="all 0.5s linear";
+        setTimeout(()=>{
+            particle.style.left=(rect.left-parentRect.left+rect.width/2+dist*Math.cos(angle))+"px";
+            particle.style.top=(rect.top-parentRect.top+rect.height/2+dist*Math.sin(angle))+"px";
+            particle.style.opacity=0;
+        },10);
+        setTimeout(()=>particle.remove(),510);
     }
 }
 
@@ -99,4 +155,4 @@ function endGame(){
     clearInterval(gameInterval);
     clearInterval(spawnInterval);
     alert("پایان بازی! امتیاز شما: "+score);
-}
+    }
