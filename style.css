@@ -1,15 +1,14 @@
-@font-face { font-family: Homa; src: url("fonts/Homa.ttf"); }
-body { margin:0;padding:0;font-family:Homa,sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; transition: background 0.3s; }
+body { margin:0;padding:0;font-family:'Harmattan',sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; transition: background 0.3s; }
 #gameContainer { width:95vw; max-width:480px; text-align:center; position:relative; }
 #gameArea {
   width:100%;
-  height:calc(60vh); /* ارتفاع کافی برای موبایل */
-  padding-bottom:150px; /* فضای برای کیبورد موبایل */
+  height:calc(60vh);
+  padding-bottom:250px; /* فضای کافی برای کیبورد موبایل */
   border:2px solid #444;
-  background:linear-gradient(45deg, #6a0dad, #b19cd9);
   border-radius:12px;
   position:relative;
   overflow:hidden;
+  background:linear-gradient(45deg, #6a0dad, #b19cd9);
   transition: background 0.3s;
 }
 .word { position:absolute; top:-50px; font-weight:bold; color:white; text-align:center; border-radius:8px; padding:8px; width:40px; height:40px; display:flex; justify-content:center; align-items:center; box-shadow:0 0 5px #000; transition: background 0.3s; }
