@@ -148,4 +148,4 @@ function endGame(){
     clearInterval(gameInterval);
     clearInterval(spawnInterval);
     alert("پایان بازی! امتیاز شما: "+score);
-                                     }
+}
