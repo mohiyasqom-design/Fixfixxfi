@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 
     document.getElementById("startBtn").addEventListener("click",()=>{
         startGame();
-        hiddenInput.focus(); // کیبورد موبایل فعال می‌شود
+        hiddenInput.focus(); // تمرکز روی input مخفی
     });
 
     document.getElementById("theme").addEventListener("change", e=>{
@@ -79,7 +79,7 @@ function update(){
     activeLetters.forEach((l,i)=>{
         l.y+=fallingSpeed;
         l.element.style.top=l.y+"px";
-        if(l.y>290){loseLife(i);}
+        if(l.y>gameArea.clientHeight-40){loseLife(i);}
     });
 }
 
@@ -147,4 +147,4 @@ function endGame(){
     clearInterval(gameInterval);
     clearInterval(spawnInterval);
     alert("پایان بازی! امتیاز شما: "+score);
-          }
+}
