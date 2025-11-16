@@ -1,5 +1,24 @@
-body { margin:0;padding:0;font-family:'Harmattan',sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; transition: background 0.3s; }
-#gameContainer { width:95vw; max-width:480px; text-align:center; position:relative; }
+body {
+  margin:0;
+  padding:10px 0;
+  font-family:'Harmattan',sans-serif;
+  background:#f3f3f3;
+  color:#000;
+  overflow-y:auto; /* اجازه اسکرول */
+  -webkit-overflow-scrolling: touch;
+}
+#gameContainer {
+  width:95vw;
+  max-width:480px;
+  margin:0 auto;
+  text-align:center;
+  position:relative;
+}
+#menu {
+  max-height:40vh;
+  overflow-y:auto;
+  margin-bottom:10px;
+}
 #gameArea {
   width:100%;
   height:calc(60vh);
@@ -11,7 +30,12 @@ body { margin:0;padding:0;font-family:'Harmattan',sans-serif; display:flex; just
   background:linear-gradient(45deg, #6a0dad, #b19cd9);
   transition: background 0.3s;
 }
-.word { position:absolute; top:-50px; font-weight:bold; color:white; text-align:center; border-radius:8px; padding:8px; width:40px; height:40px; display:flex; justify-content:center; align-items:center; box-shadow:0 0 5px #000; transition: background 0.3s; }
+.word { 
+  position:absolute; top:-50px; font-weight:bold; color:white; 
+  text-align:center; border-radius:8px; padding:8px; width:40px; height:40px; 
+  display:flex; justify-content:center; align-items:center; box-shadow:0 0 5px #000; 
+  transition: background 0.3s; 
+}
 .explode { animation:boom 0.35s forwards; }
 .particle { position:absolute; border-radius:50%; pointer-events:none; opacity:0.9; width:6px; height:6px; }
 @keyframes boom {0%{transform:scale(1);opacity:1;}100%{transform:scale(3);opacity:0;}}
