@@ -11,18 +11,10 @@ let activeLetters=[], gameInterval, spawnInterval;
 
 window.addEventListener("DOMContentLoaded",()=>{
     document.getElementById("highScoreBox").textContent="بالاترین امتیاز: "+highScore;
-    const kb=document.getElementById("mobileKeyboard");
-    letters.forEach(l=>{
-        const btn=document.createElement("button");
-        btn.className="keyBtn";
-        btn.textContent=l;
-        btn.onclick=()=>checkTyped(l);
-        kb.appendChild(btn);
-    });
 
     document.getElementById("startBtn").addEventListener("click",()=>{
         startGame();
-        hiddenInput.focus(); // تمرکز روی input مخفی برای موبایل
+        hiddenInput.focus(); // کیبورد موبایل فعال می‌شود
     });
 
     document.getElementById("theme").addEventListener("change", e=>{
@@ -155,4 +147,4 @@ function endGame(){
     clearInterval(gameInterval);
     clearInterval(spawnInterval);
     alert("پایان بازی! امتیاز شما: "+score);
-    }
+          }
