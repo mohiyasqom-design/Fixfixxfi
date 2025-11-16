@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بازی سرعت تایپ موبایل V2</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+<audio id="explodeSound" src="explode.mp3"></audio>
+<div id="gameContainer">
+  <h1>بازی سرعت تایپ موبایل V2</h1>
+  <div id="menu">
+    <button id="startBtn">شروع بازی</button>
+    <label>سطح سختی:</label>
+    <select id="difficulty">
+      <option value="easy">آسان</option>
+      <option value="medium">متوسط</option>
+      <option value="hard">سخت</option>
+    </select>
+    <label>تم:</label>
+    <select id="theme">
+      <option value="light">روشن</option>
+      <option value="dark">تاریک</option>
+      <option value="neon">نئون</option>
+    </select>
+    <label>فونت:</label>
+    <select id="fontSelect">
+      <option value="Homa">Homa</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Arial">Arial</option>
+    </select>
+    <label>اندازه حرف:</label>
+    <select id="letterSize">
+      <option value="28">کوچک</option>
+      <option value="36" selected>متوسط</option>
+      <option value="48">بزرگ</option>
+    </select>
+    <div id="highScoreBox">بالاترین امتیاز: 0</div>
+  </div>
+  <div id="gameArea"></div>
+  <div id="mobileKeyboard"></div>
+  <div id="lives">❤️❤️❤️</div>
+  <div id="score">امتیاز: 0</div>
+  <div id="footer">کاری از <a href="https://eitaa.com/yar5313" target="_blank">yar5313@</a></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
