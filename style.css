@@ -1,7 +1,17 @@
 @font-face { font-family: Homa; src: url("fonts/Homa.ttf"); }
 body { margin:0;padding:0;font-family:Homa,sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; transition: background 0.3s; }
 #gameContainer { width:95vw; max-width:480px; text-align:center; position:relative; }
-#gameArea { width:100%; height:300px; border:2px solid #444; background:linear-gradient(45deg, #6a0dad, #b19cd9); border-radius:12px; position:relative; overflow:hidden; margin-bottom:10px; transition: background 0.3s; }
+#gameArea {
+  width:100%;
+  height:calc(60vh); /* ارتفاع کافی برای موبایل */
+  padding-bottom:150px; /* فضای برای کیبورد موبایل */
+  border:2px solid #444;
+  background:linear-gradient(45deg, #6a0dad, #b19cd9);
+  border-radius:12px;
+  position:relative;
+  overflow:hidden;
+  transition: background 0.3s;
+}
 .word { position:absolute; top:-50px; font-weight:bold; color:white; text-align:center; border-radius:8px; padding:8px; width:40px; height:40px; display:flex; justify-content:center; align-items:center; box-shadow:0 0 5px #000; transition: background 0.3s; }
 .explode { animation:boom 0.35s forwards; }
 .particle { position:absolute; border-radius:50%; pointer-events:none; opacity:0.9; width:6px; height:6px; }
@@ -12,9 +22,6 @@ body.dark { background:#111; color:white; }
 body.dark #gameArea { background:#222; border-color:#666; }
 body.neon { background:#1a1a1a; color:cyan; }
 body.neon #gameArea { background:#3a0ca3; border-color:cyan; }
-#mobileKeyboard { margin-top:15px; display:grid; grid-template-columns:repeat(8,1fr); gap:6px; }
-.keyBtn { padding:10px 0; font-size:22px; border:none; border-radius:8px; background:#ddd; }
-.keyBtn:active { background:#bbb; }
 #score,#highScoreBox,#lives { font-size:22px; margin-top:5px; }
 #footer { margin-top:10px; font-size:16px; }
 #footer a { color:#0af; text-decoration:none; }
