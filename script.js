@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 
     document.getElementById("startBtn").addEventListener("click",()=>{
         startGame();
-        hiddenInput.focus(); 
+        hiddenInput.focus(); // کیبورد باز می‌شود بعد از شروع
     });
 
     document.getElementById("theme").addEventListener("change", e=>{
@@ -56,7 +56,7 @@ function startGame(){
     spawnInterval=setInterval(spawnLetter,spawnRate);
     gameInterval=setInterval(update,20);
     hiddenInput.focus();
-    gameArea.scrollIntoView({behavior:"smooth"}); // اطمینان از بالای gameArea
+    gameArea.scrollIntoView({behavior:"smooth"});
 }
 
 function spawnLetter(){
@@ -148,4 +148,4 @@ function endGame(){
     clearInterval(gameInterval);
     clearInterval(spawnInterval);
     alert("پایان بازی! امتیاز شما: "+score);
-}
+                                     }
